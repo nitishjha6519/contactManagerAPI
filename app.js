@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("./config");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const contactsModel = require("./model/contacts");
@@ -162,5 +161,4 @@ app.patch("/v1/contacts/:id", async (req, res) => {
     });
   }
 });
-
-app.listen(5000, () => console.log("server is listening at port 5000"));
+module.exports = app;
