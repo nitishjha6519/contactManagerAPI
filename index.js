@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
+let password = process.env.PASSWORD;
+let username = process.env.MongoUser;
+console.log(password, username);
 mongoose.connect(
-  // `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.eqvbavg.mongodb.net/contact?retryWrites=true&w=majority`,
-  `mongodb+srv://njzAdmin:MongoTest@cluster0.eqvbavg.mongodb.net/contact?retryWrites=true&w=majority`,
+  `mongodb+srv://${username}:${password}@cluster0.eqvbavg.mongodb.net/contact?retryWrites=true&w=majority`,
 
   (err) => {
     if (err) {
