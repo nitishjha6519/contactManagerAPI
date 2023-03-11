@@ -1,12 +1,11 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const mongoose = require("./config");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const contactsModel = require("./model/contacts");
 const { ObjectId } = require("bson");
 
 const app = express();
-mongoose.connect("mongodb://127.0.0.1/contact");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -104,7 +103,9 @@ app.delete("/v1/contacts/:id", async (req, res) => {
   try {
     let user = await contactsModel.deleteOne({ _id: new ObjectId(id) });
     console.log(user);
-    return res.status(204).json({});
+    return res.status(204).json({
+      status: "ok",
+    });
   } catch (err) {
     return res.status(404).json({
       status: "failed",
@@ -126,7 +127,9 @@ app.put("/v1/contacts/:id", async (req, res) => {
       { $set: data }
     );
     console.log(user);
-    return res.status(204).json({});
+    return res.status(204).json({
+      status: "success",
+    });
   } catch (err) {
     return res.status(404).json({
       status: "failed",
@@ -141,14 +144,16 @@ app.patch("/v1/contacts/:id", async (req, res) => {
   let data = req.body;
 
   console.log(id);
-  console.log(data);
+  // console.log(data);
   try {
     let user = await contactsModel.updateOne(
       { _id: new ObjectId(id) },
       { $set: data }
     );
     console.log(user);
-    return res.status(204).json({});
+    return res.status(204).json({
+      status: "success",
+    });
   } catch (err) {
     return res.status(404).json({
       status: "failed",
